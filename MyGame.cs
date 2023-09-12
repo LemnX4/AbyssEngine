@@ -8,8 +8,8 @@ namespace Abyss
 {
     public class MyGame : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public static GraphicsDeviceManager _graphics;
+        public static SpriteBatch _spriteBatch;
 
         public static List<System> Systems = new();
         public static List<System> UpdateSystems = new();
@@ -21,6 +21,8 @@ namespace Abyss
 
         public static int Width = 1280;
         public static int Height = 720;
+
+        public static int SPS = 4;
 
         public MyGame()
         {
