@@ -8,8 +8,8 @@ namespace Abyss
 {
     public class MyGame : Game
     {
-        public static GraphicsDeviceManager _graphics;
-        public static SpriteBatch _spriteBatch;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
 
         public static List<System> Systems = new();
         public static List<System> UpdateSystems = new();
@@ -18,6 +18,7 @@ namespace Abyss
 
         public static KeyboardManager KeyboardManager = new();
         public static MouseManager MouseManager = new();
+        public static TexturesManager TexturesManager = new();
 
         public static int Width = 1280;
         public static int Height = 720;
@@ -26,14 +27,18 @@ namespace Abyss
 
         public MyGame()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
 
-            _graphics.PreferredBackBufferWidth = Width;
-            _graphics.PreferredBackBufferHeight = Height;
-            _graphics.ApplyChanges();
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
+            graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            TexturesManager.Content = Content;
+            TexturesManager.SpriteBatch = spriteBatch;
+            TexturesManager.DeviceManager = graphics;
         }
 
         protected override void Initialize()
@@ -45,7 +50,7 @@ namespace Abyss
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -60,6 +65,7 @@ namespace Abyss
             MouseManager.Flush(gameTime);
             KeyboardManager.Flush(gameTime);
 
+
             foreach (System system in UpdateSystems)
                 system.Update(deltaTime);
 
@@ -73,7 +79,7 @@ namespace Abyss
 
 
             foreach (System system in RenderSystems)
-                system.Render(_spriteBatch);
+                system.Render(spriteBatch);
 
 
             base.Draw(gameTime);

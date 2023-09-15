@@ -6,8 +6,8 @@ namespace Abyss
 {
     public class Region
     {
-        Vector2 Center = new Vector2(0f, 0f);
-        float Size = 0f;
+        public Vector2 Center { get; set; } = new Vector2(0f, 0f);
+        public float Size { get; set; } = 0f;
 
         public Region(Vector2 center, float size)
         {
@@ -20,21 +20,21 @@ namespace Abyss
             return false;
         }
 
-        bool Intersect(Rectangle renctange)
+        bool Intersect(Rectangle rectange)
         {
             return false;
         }
     }
     public class QuadTree
     {
-        int Capacity;
-        Region boundary;
-        List<QuadTree> subTrees = new List<QuadTree>();
+        public int Capacity { get; set; }
+        public Region Boundary { get; set; }
+        public List<QuadTree> SubTrees { get; set; } = new List<QuadTree>();
 
         public QuadTree(Vector2 center, float size, int capacity=4)
         {
             Capacity = capacity;
-            this.boundary = new Region(center, size);
+            Boundary = new Region(center, size);
         }
 
         void Insert(Vector2 point)
